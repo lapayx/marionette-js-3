@@ -1,0 +1,35 @@
+<tr>
+    <th scope="row">#</th>
+    <td class="js-id"><%= id %></td>
+    <td class="js-source"><% if (isEditSource ){ %> @require("./input.jst") <% } else { %> <%= source %> <% } %></td>
+    <td class="js-medium"><% if (isEditMedium){ %> @require("./input.jst") <% } else { %> <%= medium %> <% } %></td>
+    <td class="js-channel">
+        <% if (isEditChannel){
+            var channels = ['Email', 'Direct Mail', 'Social', 'Programmatic Advertising', 'Public Relations', 'QR', 'CPC', 'Direct', 'Referral', 'Search'];
+        %>
+
+
+        <div class="input-group" style="width: inherit;">
+            <select class="form-control js-edit-value">
+                <% _.each(channels,function(item){
+                %> <option <%= (item == editValue && "selected")  %>><%= item %></option>
+                 <%
+                });
+                %>
+            </select>
+            <div class="input-group-btn">
+                <button class="btn btn-default js-save btn-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                <button class="btn btn-default js-cancel btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+            </div>
+        </div>
+        <% } else { %>
+            <%= channel %>
+        <% } %>
+    </td>
+
+    <td><%= direction %></td>
+    <td><%= modifiedDate %></td>
+    <td><%= modifiedBy %></td>
+    <td><%= createdDate %></td>
+    <td><%= createdBy %></td>
+</tr>

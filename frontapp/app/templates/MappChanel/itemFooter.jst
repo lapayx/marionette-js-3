@@ -1,0 +1,42 @@
+<div class="panel-footer panel-pagination">
+    <%
+        var lastPage = Math.round(totalRecord/pageRange)+1;
+        var showFrom = (currentPage-1)*pageRange+1;
+        var showTo = currentPage*pageRange;
+
+    %>
+
+
+    Showing <%=  showFrom %> to <%= showTo %> of <%= totalRecord %> entries
+    <ul class="pagination pull-right">
+
+        <li class="<% if(currentPage == 1) { %>disabled<% } else { %> js-change-page <% } %> " data-next-page = <%= currentPage-1 %> >
+            <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">«</span></a>
+        </li>
+        <li class="<% if(currentPage == 1) { %>active<% }%> js-change-page " data-next-page = 1 ><a href="#">1 </a></li>
+        <li class="<% if(currentPage == 2) { %>active<% }%>  js-change-page " data-next-page = 2><a href="#">2</a></li>
+        <% if (currentPage > 5 && lastPage>7) { %>
+        <li > <a href="javascript:void(0)">...</a> </li>
+        <% } %>
+        <% for (var i = currentPage-1; i<currentPage+2;i++){
+            if(i>2 && i<lastPage-1){
+
+        %>
+            <li class="<% if(currentPage == i) { %>active<% }%> js-change-page " data-next-page = <%= i %> ><a href="#"><%= i %></a></li>
+        <%
+        }
+        }
+        %>
+
+
+        <% if ( currentPage < (lastPage-4) && lastPage>7) { %>
+            <li > <a href="javascript:void(0)">...</a> </li>
+        <% } %>
+        <% if (lastPage>3) { %>
+            <li class="<% if(currentPage == lastPage-1) { %>active<% }%> js-change-page " data-next-page = <%= lastPage-1 %> ><a href="#"><%= lastPage-1 %></a></li>
+        <% } %>
+        <li class="<% if(currentPage == lastPage) { %>active<% }%> js-change-page " data-next-page = <%= lastPage %> ><a href="#"><%= lastPage %></a></li>
+        <li disabled class="<% if(currentPage >= lastPage) { %>disabled<% } else { %> js-change-page <% } %>   " data-next-page = <%= currentPage+1 %> ><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+    </ul>
+    <div class="clearfix"></div>
+</div>
